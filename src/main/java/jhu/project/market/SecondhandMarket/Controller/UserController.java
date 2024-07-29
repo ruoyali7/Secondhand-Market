@@ -1,14 +1,14 @@
 package jhu.project.market.SecondhandMarket.Controller;
 
-import jhu.project.market.SecondhandMarket.Entity.Product;
 import jhu.project.market.SecondhandMarket.Entity.User;
 import jhu.project.market.SecondhandMarket.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "/user")
 public class UserController {
     private final UserService userService;
