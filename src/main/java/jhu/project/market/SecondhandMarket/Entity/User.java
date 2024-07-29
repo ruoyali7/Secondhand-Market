@@ -12,6 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "is_seller")
+    private boolean isSeller;
+
     @Column(name = "first_name")
     @NotNull(message = "First Name cannot be null")
     @Size(min = 1, max = 16)
@@ -42,7 +45,7 @@ public class User {
 
     @Column(name = "phone_number")
     @NotBlank
-    @Pattern(regexp="\\(\\d{3}\\)\\d{3}-\\d{4}")
+    @Pattern(regexp = "\\(\\d{3}\\)\\d{3}-\\d{4}")
     private String phoneNumber;
 
 }

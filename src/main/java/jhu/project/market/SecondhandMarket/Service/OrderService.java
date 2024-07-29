@@ -3,7 +3,9 @@ package jhu.project.market.SecondhandMarket.Service;
 import jhu.project.market.SecondhandMarket.Entity.Order;
 import jhu.project.market.SecondhandMarket.Entity.Product;
 import jhu.project.market.SecondhandMarket.Entity.User;
-import jhu.project.market.SecondhandMarket.Repository.*;
+import jhu.project.market.SecondhandMarket.Repository.OrderRepository;
+import jhu.project.market.SecondhandMarket.Repository.ProductRepository;
+import jhu.project.market.SecondhandMarket.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class OrderService {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
     }
+
     // Method to retrieve all orders
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
