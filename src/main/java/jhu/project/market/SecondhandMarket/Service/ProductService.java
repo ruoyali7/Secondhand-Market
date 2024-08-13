@@ -1,6 +1,7 @@
 package jhu.project.market.SecondhandMarket.Service;
 
 import jhu.project.market.SecondhandMarket.Entity.Product;
+import jhu.project.market.SecondhandMarket.Entity.User;
 import jhu.project.market.SecondhandMarket.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public List<Product> getAllProductsBySeller(User seller) {
+        return productRepository.getProductsBySeller(seller);
+    }
+
+    public List<Product> getAllProductsByCategory(String category) {
+        return productRepository.getProductsByCategory(category);
+    }
 }

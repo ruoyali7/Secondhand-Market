@@ -3,10 +3,11 @@ package jhu.project.market.SecondhandMarket.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "`order`")
+@Table(name = "`orders`")
 @Data
 public class Order {
     @Id
@@ -17,13 +18,12 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @Column(name = "item_count")
+    private int itemCount;
+
+    @Column(name = "total_price")
+    private double totalPrice;
 
     @Column(name = "order_time")
-    private LocalDateTime orderTime;
-
-    @Column(name = "count")
-    private int count;
+    private Timestamp orderTime;
 }

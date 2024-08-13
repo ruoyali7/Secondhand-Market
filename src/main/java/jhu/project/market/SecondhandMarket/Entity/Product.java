@@ -15,4 +15,9 @@ public class Product {
     private String description;
     private double price;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "seller_id")
+    private User seller;
+
+    private String category;
 }
