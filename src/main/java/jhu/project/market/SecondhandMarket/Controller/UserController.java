@@ -59,7 +59,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("orders", orders);
 
-        return "userProfile"; // This is the JSP page for the user profile
+        return "userProfile"; 
     }
 
 }

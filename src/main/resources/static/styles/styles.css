@@ -11,6 +11,8 @@ body {
     min-height: 100vh;
 }
 
+
+
 a {
     text-decoration: none;
     color: inherit;
@@ -23,6 +25,28 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    margin-left: 10px;
+    padding: 5px 15px;
+    background-color: white;
+    color: #628e94;
+    border: 1px solid #628e94;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button:hover {
+    background-color: #507680;
+    color: white;
 }
 
 .logo img {
@@ -87,6 +111,7 @@ header {
 }
 .profile-icon img {
 	height: 60px;
+	
 }
 
 .cart-count {
@@ -97,6 +122,9 @@ header {
     vertical-align: top;
     margin-left: -10px;
 }
+
+
+
 
 /* Main content */
 main {
@@ -113,13 +141,97 @@ main {
     color: #333;
 }
 
-.items, .banners {
+
+/**/
+
+.categories-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start; 
+    gap: 10px;
+}
+
+.category {
+    flex: 1 1 calc(33.333% - 20px); 
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* For the items in the browsing page */
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    gap: 10px;
 }
 
 .item {
+    flex: 1 1 calc(33.333% - 20px); 
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width:450px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* For the cart items */
+.cart-items-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    gap: 10px;
+}
+
+.cart-item {
+    flex: 1 1 calc(33.333% - 20px); 
+    padding: 10px;
+    max-width:450px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+
+
+
+/**/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.banners {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}*/
+
+/*.item {
     flex: 1 1 30%;
     max-width: 30%;
     padding: 10px;
@@ -129,9 +241,9 @@ main {
     border-radius: 3px;
     text-align: center;
     box-sizing: border-box;
-}
+}*/
 
-.categories-list {
+/*.categories-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -144,7 +256,7 @@ main {
     margin-bottom: 20px;
     box-sizing: border-box;
 }
-
+*/
 
 .item button, .cart-item button {
     width: 100%;
@@ -176,7 +288,7 @@ main {
     object-fit: cover;
 }
 
-.cart-items-list {
+/*.cart-items-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -193,8 +305,9 @@ main {
     text-align: center;
     box-sizing: border-box;
 }
-
+*/
 /* Summary and actions */
+
 .cart-summary {
     text-align: center;
     margin: 20px 0;
@@ -227,11 +340,25 @@ main {
     margin: 10px 0;
 }
 
-.banners img {
+/*.banners img {
     flex: 1 1 45%;
-    max-width: 45%;
+    max-width: 50%;
     height: auto;
     margin: 10px;
+}*/
+
+.banners {
+    display: flex;
+    justify-content: space-between; 
+    gap:10px;
+    
+}
+
+.banners img {
+    flex: 1 1 100%;
+    max-width: 100%; 
+    height: auto;
+    margin: 0; 
 }
 
 /* Footer */
@@ -294,6 +421,46 @@ footer p {
     text-align: center;
 }
 
+
+.user-info {
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-history {
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.order-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.order-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: left;
+}
+
+.order-card a {
+    text-decoration: none;
+    color: #333;
+}
+
+.order-card a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
 /* The Close Button */
 .close {
     color: #aaa;
@@ -309,4 +476,237 @@ footer p {
     cursor: pointer;
 }
 
+.product-link:hover {
+    text-decoration: underline;
+    color: black;
+}
 
+
+.modal-content form button {
+    padding: 10px 20px;
+    background-color: #628e94;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content form button:hover {
+    background-color: #507680;
+}
+
+.add-item {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.add-item h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-centered {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*
+.form-group input,
+.form-group textarea {
+    width: 90%; 
+    margin: 0 auto;
+    display: block;
+    margin-bottom:10px;
+}*/
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 0 auto; 
+    display: block; 
+    margin-bottom:10px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #628e94;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #507680;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/*
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #628e94;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #507680;
+}
+*/
+.error {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Seller Items */
+.seller-items {
+    margin-top: 30px;
+}
+
+.seller-items h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.item-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.item-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 18px;
+}
+
+.item-card .price {
+    font-size: 16px;
+    color: #628e94;
+    margin-bottom: 10px;
+}
+
+.item-card .description {
+    font-size: 14px;
+    color: #777;
+}
+
+
+
+.checkout-section {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.order-summary {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.checkout-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.error2 {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+.form-centered.confirmation {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-centered.confirmation h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-centered.confirmation h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.form-centered.confirmation p,
+.form-centered.confirmation ul {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.form-centered.confirmation .button {
+    padding: 10px 20px;
+    background-color: #628e94;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.form-centered.confirmation .button:hover {
+    background-color: #507680;
+}

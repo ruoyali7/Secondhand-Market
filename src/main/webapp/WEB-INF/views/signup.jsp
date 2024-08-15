@@ -22,46 +22,48 @@
     </header>
 
     <main>
-        <h2>Sign Up</h2>
-        <c:if test="${not empty message}">
-            <div class="error">${message}</div>
-        </c:if>
-        <form action="${pageContext.request.contextPath}/signup" method="post">
-            <div class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required>
-            </div>
-            <div class="form-group">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="(123)456-7890">
-            </div>
-            <div class="form-group">
-                <label for="isSeller">Are you a seller?</label>
-                <input type="checkbox" id="isSeller" name="isSeller">
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a></p>
+        <section class="form-centered">
+            <h2>Sign Up</h2>
+            <c:if test="${not empty message}">
+                <div class="error">${message}</div>
+            </c:if>
+            <form action="${pageContext.request.contextPath}/signup" method="post">
+                <div class="form-group">
+                    <label for="firstName"><span style="font-weight:bold">First Name:</span></label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName"><span style="font-weight:bold">Last Name:</span></label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><span style="font-weight:bold">Email:</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="username"><span style="font-weight:bold">Username:</span></label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><span style="font-weight:bold">Password:</span></label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="address"><span style="font-weight:bold">Address:</span></label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber"><span style="font-weight:bold">Phone Number:</span></label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="(123)456-7890">
+                </div>
+                <div class="form-group">
+                    <label for="isSeller"><span style="font-weight:bold">Are you a seller?</span></label>
+                    <input type="checkbox" name="isSeller" id="isSeller">
+                </div>
+                <button type="submit" class="button">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="${pageContext.request.contextPath}/login" class="link">Login here</a></p>
+        </section>
     </main>
 
     <footer>

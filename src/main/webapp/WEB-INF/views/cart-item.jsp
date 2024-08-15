@@ -26,6 +26,7 @@
             <c:choose>
                 <c:when test="${empty cartItems}">
                     <p>Your cart is empty.</p>
+                    <button class="back-btn" onclick="window.location.href='${pageContext.request.contextPath}/product/browsing'">Back to Browsing</button>
                 </c:when>
                 <c:otherwise>
                     <div class="cart-items-list">

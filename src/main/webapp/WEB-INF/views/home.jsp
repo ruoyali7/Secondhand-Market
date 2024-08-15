@@ -14,14 +14,14 @@
         </div>
         <div class="search-bar">
             <input type="text" placeholder="Search for products...">
-            <button>Search</button>
+            <button onclick="redirectToLogin()">Search</button>
         </div>
         <div class="nav-menu">
             <nav>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/browsing">Browse Products</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin">Admin Panel</a></li>
-                    <li><a href="${pageContext.request.contextPath}/profile">User Profile</a></li>
+                    <li><a href="javascript:void(0)" onclick="redirectToLogin()">Browse Products</a></li>
+                    <li><a href="javascript:void(0)" onclick="redirectToLogin()">Admin Panel</a></li>
+                    <li><a href="javascript:void(0)" onclick="redirectToLogin()">User Profile</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,30 +30,38 @@
             <a href="${pageContext.request.contextPath}/signup">Register</a>
         </div>
         <div class="cart-icon">
-            <a href="${pageContext.request.contextPath}/cart"><img src="${pageContext.request.contextPath}/images/shoppingcart.jpg" alt="Shopping Cart"> <span class="cart-count">0</span></a>
+            <a href="javascript:void(0)" onclick="redirectToLogin()"><img src="${pageContext.request.contextPath}/images/shoppingcart.jpg" alt="Shopping Cart"> <span class="cart-count">0</span></a>
         </div>
     </header>
 
     <main>
-        <section class="popular-items">
-            <h2>Popular Items</h2>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1>Welcome to Secondhand Market</h1>
+            <p>Your one-stop marketplace for buying and selling secondhand items. Explore our wide range of products and find the best deals just for you!</p>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="featured-items">
+            <h2>Featured Products</h2>
             <div class="items">
-                <c:forEach var="product" items="${products}">
+                <c:forEach var="product" items="${products}" begin="0" end="2">
                     <div class="item">
-                        <img src="${pageContext.request.contextPath}/images/${product.id}.jpg" alt="${product.name}">
+                        
                         <p>${product.name}</p>
                         <p>$${product.price}</p>
-                        <button>Add to Cart</button>
+                        <button onclick="redirectToLogin()">View Product</button>
                     </div>
                 </c:forEach>
             </div>
         </section>
 
+        <!-- Promotional Banners Section -->
         <section class="promotional-banners">
             <h2>Special Deals</h2>
             <div class="banners">
-                <img src="${pageContext.request.contextPath}/images/banner1.png" alt="Banner 1">
-                <img src="${pageContext.request.contextPath}/images/banner2.jpg" alt="Banner 2">
+                <a href="javascript:void(0)" onclick="redirectToLogin()"><img src="${pageContext.request.contextPath}/images/banner1.png" alt="Banner 1"></a>
+                <a href="javascript:void(0)" onclick="redirectToLogin()"><img src="${pageContext.request.contextPath}/images/banner2.jpg" alt="Banner 2"></a>
             </div>
         </section>
     </main>
@@ -63,31 +71,42 @@
             <div class="quick-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/about">About Us</a></li>
-                    <li><a href="${pageContext.request.contextPath}/contact">Contact Us</a></li>
-                    <li><a href="${pageContext.request.contextPath}/location">Store Location</a></li>
-                    <li><a href="${pageContext.request.contextPath}/qa">Q&A</a></li>
-                    <li><a href="${pageContext.request.contextPath}/claim">Claim Center</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">About Us</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Contact Us</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Store Location</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Q&A</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Claim Center</a></li>
                 </ul>
             </div>
             <div class="membership-info">
                 <h3>Membership</h3>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/signup">Registration</a></li>
-                    <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
-                    <li><a href="${pageContext.request.contextPath}/cancel">Cancel Membership</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">My Profile</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Cancel Membership</a></li>
                 </ul>
             </div>
             <div class="company-info">
                 <h3>Company Info</h3>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/policy">Policy</a></li>
-                    <li><a href="${pageContext.request.contextPath}/terms">Terms of Service</a></li>
-                    <li><a href="${pageContext.request.contextPath}/privacy">Privacy Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Policy</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Terms of Service</a></li>
+                    <li><a href="javascript:void(0)" onclick="notImplemented()">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
         <p>&copy; 2024 Secondhand Market. All rights reserved.</p>
     </footer>
+
+    <script>
+        function redirectToLogin() {
+            alert("You need to login to continue.");
+            window.location.href = "${pageContext.request.contextPath}/login";
+        }
+
+        function notImplemented() {
+            alert("This feature is not yet implemented.");
+        }
+    </script>
 </body>
 </html>

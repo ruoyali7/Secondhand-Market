@@ -15,18 +15,18 @@
     </header>
 
     <main>
-        <section class="confirmation">
+        <section class="form-centered confirmation">
             <h2>Order Confirmation</h2>
-            <p>Thank you, ${user.firstName} ${user.lastName}, for your purchase!</p>
-            <p>Your order has been successfully placed, and a confirmation email has been sent to ${user.email}.</p>
+            <p>Thank you, <strong>${user.firstName} ${user.lastName}</strong>, for your purchase!</p>
+            <p>Your order has been successfully placed, and a confirmation email has been sent to <strong>${user.email}</strong>.</p>
             <h3>Order Summary:</h3>
             <ul>
                 <c:forEach var="cartItem" items="${cartItems}">
-                    <li>${cartItem.product.name} - Quantity: ${cartItem.count}</li>
+                    <li><strong>${cartItem.product.name}</strong> - Quantity: ${cartItem.count}</li>
                 </c:forEach>
             </ul>
             <h3>Total: $<c:out value="${totalPrice}"/></h3>
-            <button onclick="window.location.href='${pageContext.request.contextPath}/product/browsing'">Continue Shopping</button>
+            <button class="button" onclick="window.location.href='${pageContext.request.contextPath}/product/browsing'">Continue Shopping</button>
         </section>
     </main>
 

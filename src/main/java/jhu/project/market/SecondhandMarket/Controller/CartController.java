@@ -89,6 +89,9 @@ public class CartController {
     @GetMapping("/list")
     public String listCartItemsForUser(@RequestParam int user_id, Model model, HttpSession session) {
         User user = userService.getUserById(user_id);
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
         List<CartItem> cartItems = cartService.listCartItemsForUser(user);
         
         session.setAttribute("cartSize", cartItems.size());
@@ -99,6 +102,9 @@ public class CartController {
     @PostMapping("/add")
     public String addCartItem(@RequestParam int user_id, @RequestParam int product_id, @RequestParam Integer count, HttpSession session) {
         User user = userService.getUserById(user_id);
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
         Product product = productService.getProductById(product_id);
         System.out.println("Adding item to cart:");
         System.out.println("User ID: " + user_id);
@@ -118,6 +124,9 @@ public class CartController {
     @PostMapping("/delete")
     public String deleteCartItem(@RequestParam int user_id, @RequestParam int product_it, @RequestParam(value = "count", required = false) Integer count, HttpSession session) {
         User user = userService.getUserById(user_id);
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
         Product product = productService.getProductById(product_it);
         if (count == null) {
             cartService.deleteCartItem(user, product);
@@ -138,6 +147,9 @@ public class CartController {
     @PostMapping("/checkOut")
     public String showCheckoutPage(@RequestParam int user_id, Model model, HttpSession session) {
         User user = userService.getUserById(user_id);
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
         List<CartItem> cartItems = cartService.listCartItemsForUser(user);
 
         double totalPrice = cartItems.stream().mapToDouble(CartItem::getTotalPrice).sum();

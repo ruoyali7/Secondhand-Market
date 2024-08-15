@@ -2,6 +2,12 @@ package jhu.project.market.SecondhandMarket.Controller;
 
 import jhu.project.market.SecondhandMarket.Entity.User;
 import jhu.project.market.SecondhandMarket.Service.UserService;
+import jhu.project.market.SecondhandMarket.Entity.CartItem;
+import jhu.project.market.SecondhandMarket.Service.CartService;
+import jhu.project.market.SecondhandMarket.Entity.Product;
+import jhu.project.market.SecondhandMarket.Service.ProductService;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +27,20 @@ HomeController for user signup, login and seller signup, login
 public class HomeController {
     Logger logger = LoggerFactory.getLogger(HomeController.class);
     private final UserService userService;
+    private final CartService cartService;
+    private final ProductService productService;
 
     @Autowired
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, CartService cartService, ProductService productService) {
         this.userService = userService;
+        this.cartService = cartService;
+        this.productService = productService;
     }
 
     @GetMapping("/")
-    public String showHome() {
+    public String showHome(Model model) {
+    	List<Product> products = productService.getAllProducts(); // Fetch all products
+        model.addAttribute("products", products);
         return "home";
     }
 
@@ -71,6 +83,11 @@ public class HomeController {
 
         if (user != null && user.getPassword().equals(password)) {
         	session.setAttribute("user", user);
+        	List<CartItem> cartItems = cartService.listCartItemsForUser(user);
+            session.setAttribute("cartSize", cartItems.size());
+        	if (user.isSeller()) {
+                return "redirect:/seller/dashboard"; // Redirect to seller dashboard if the user is a seller
+            }
             return "redirect:/product/browsing"; // Redirect to browsing page after successful login
         }
 
@@ -121,7 +138,7 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public String processSignup(@ModelAttribute User user, HttpSession session, Model model) {
+    public String processSignup(@ModelAttribute User user, @RequestParam(value = "isSeller", required = false) String isSeller, HttpSession session, Model model) {
         String message = "";
 
         // Check if username exists
@@ -139,13 +156,20 @@ public class HomeController {
         }
 
         // If both checks pass, save the user
+        user.setSeller(isSeller != null);
         userService.saveUser(user);
         session.setAttribute("user", user);
 
         if (user.isSeller()) {
-            return "redirect:seller";
+            return "redirect:/seller/dashboard";
         }
         return "redirect:/product/browsing";
+    }
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();  // Invalidate the session to clear all data
+        return "redirect:/";  // Redirect to the home page after logout
     }
 
 //    @PostMapping("/login")

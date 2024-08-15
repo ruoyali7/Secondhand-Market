@@ -1,11 +1,14 @@
 package jhu.project.market.SecondhandMarket.Controller;
 
 import jhu.project.market.SecondhandMarket.Entity.Product;
+import jhu.project.market.SecondhandMarket.Entity.User;
 import jhu.project.market.SecondhandMarket.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,12 +24,46 @@ public class ProductController {
         this.productService = productService;
     }
     
+//    @GetMapping("/browsing")
+//    public String showBrowsingPage(@RequestParam(required = false) String category,
+//                                   @RequestParam(required = false) String search,
+//                                   HttpSession session,
+//                                   Model model) {
+//        List<Product> products;
+//        
+//
+//        if (category != null && !category.isEmpty()) {
+//            products = productService.getAllProductsByCategory(category);
+//        } else if (search != null && !search.isEmpty()) {
+//            products = productService.getAllProducts().stream()
+//                    .filter(product -> product.getName().toLowerCase().contains(search.toLowerCase()))
+//                    .collect(Collectors.toList());
+//        } else {
+//            products = productService.getAllProducts();
+//        }
+//
+//        model.addAttribute("products", products);
+//     // Pass seller status to JSP
+//        User user = (User) session.getAttribute("user");
+//        if (user != null) {
+//            model.addAttribute("isSeller", user.isSeller());
+//        } else {
+//            model.addAttribute("isSeller", false);
+//        }
+//        return "browsing";  // This will return the browsing.jsp view
+//    }
+    
     @GetMapping("/browsing")
     public String showBrowsingPage(@RequestParam(required = false) String category,
                                    @RequestParam(required = false) String search,
+                                   HttpSession session,
                                    Model model) {
-        List<Product> products;
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login"; // Redirect to login page if user is not logged in
+        }
 
+        List<Product> products;
         if (category != null && !category.isEmpty()) {
             products = productService.getAllProductsByCategory(category);
         } else if (search != null && !search.isEmpty()) {
@@ -38,7 +75,9 @@ public class ProductController {
         }
 
         model.addAttribute("products", products);
-        return "browsing";  // This will return the browsing.jsp view
+        model.addAttribute("isSeller", user.isSeller());
+
+        return "browsing";  
     }
 
     @GetMapping

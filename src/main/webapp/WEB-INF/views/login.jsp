@@ -15,22 +15,24 @@
     </header>
 
     <main>
-        <h2>Login</h2>
-        <c:if test="${not empty message}">
-            <div class="error">${message}</div>
-        </c:if>
-        <form action="${pageContext.request.contextPath}/login" method="post">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="${pageContext.request.contextPath}/signup">Register here</a></p>
+        <section class="form-centered">
+            <h2>Login</h2>
+            <c:if test="${not empty message}">
+                <div class="error">${message}</div>
+            </c:if>
+            <form action="${pageContext.request.contextPath}/login" method="post">
+                <div class="form-group">
+                    <label for="username"><span style="font-weight:bold">Username:</span></label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"><span style="font-weight:bold">Password:</span></label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="button">Login</button>
+            </form>
+            <p>Don't have an account? <a href="${pageContext.request.contextPath}/signup" class="link">Register here</a></p>
+        </section>
     </main>
 
     <footer>

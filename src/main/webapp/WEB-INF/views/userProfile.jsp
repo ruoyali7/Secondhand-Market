@@ -12,6 +12,14 @@
         <div class="logo">
             <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Secondhand Market"></a>
         </div>
+        <div class="header-buttons">
+        <div class="auth-buttons">
+            <a href="${pageContext.request.contextPath}/product/browsing" class="button">Back To Browsing</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="${pageContext.request.contextPath}/logout" class="button">Logout</a>
+        </div>
+        </div>
     </header>
 
     <main>
@@ -30,21 +38,29 @@
                     <p>No orders found.</p>
                 </c:when>
                 <c:otherwise>
-                    <ul>
+                    <div class="order-list">
                         <c:forEach var="order" items="${orders}">
-                            <li>
-                                <a href="#" class="order-link" data-id="${order.id}">Order #${order.id} - ${order.orderTime} - Total: $${order.totalPrice}</a>
-                            </li>
+                            <div class="order-card">
+                                <a href="#" class="order-link" data-id="${order.id}">
+                                    <strong>Order #${order.id}</strong><br>
+                                    Date: ${order.orderTime}<br>
+                                    Total: $${order.totalPrice}
+                                </a>
+                            </div>
                         </c:forEach>
-                    </ul>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </section>
 
-        <section class="order-items">
-            <h3>Order Items</h3>
-            <div id="order-items-container"></div>
-        </section>
+        <!-- Order Details Modal -->
+        <div id="order-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3 id="order-title"></h3>
+                <div id="order-items-container"></div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -62,13 +78,19 @@
                 $.get("/orders/listItem?order_id=" + orderId, function (data) {
                     let itemsHtml = "<ul>";
                     $.each(data, function(index, item) {
-                        itemsHtml += "<li>Product: " + item.product.name + " - Quantity: " + item.count + " - Price: $" + item.price + "</li>";
+                        itemsHtml += "<li>" + item.product.name + ", Quantity: " + item.count + ", Price: $" + item.price + "</li>";
                     });
                     itemsHtml += "</ul>";
 
-                    // Display the order items
+                    // Display the order items in the modal
                     $("#order-items-container").html(itemsHtml);
+                    $("#order-title").text("Order #" + orderId + " Details");
+                    $("#order-modal").show();
                 });
+            });
+
+            $(".close").click(function () {
+                $("#order-modal").hide();
             });
         });
     </script>

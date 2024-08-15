@@ -19,6 +19,11 @@
                 <button type="submit">Search</button>
             </form>
         </div>
+        <c:if test="${isSeller}">
+                <div class="auth-buttons">
+                    <a href="${pageContext.request.contextPath}/seller/dashboard" class="button">Switch to Selling</a>
+                </div>
+            </c:if>
         <div class="auth-buttons">
             <a href="${pageContext.request.contextPath}/logout">Logout</a>
         </div>
@@ -26,16 +31,14 @@
 	        <a href="${pageContext.request.contextPath}/user/profile"><img src="${pageContext.request.contextPath}/images/userProfile.png" alt="User Profile"></a>
 	    </div>
         <div class="cart-icon">
-            <a href="${pageContext.request.contextPath}/cart/list?user_id=${sessionScope.user.id}"><img src="${pageContext.request.contextPath}/images/shoppingcart.jpg" alt="Shopping Cart"> <span class="cart-count">${sessionScope.cartSize}</span></a>
+            <a href="${pageContext.request.contextPath}/cart/list?user_id=${sessionScope.user.id}"><img src="${pageContext.request.contextPath}/images/shoppingcart.jpg" alt="Shopping Cart"> 
+            <span class="cart-count">${sessionScope.cartSize != null ? sessionScope.cartSize : 0}</span>
+            </a>
         </div>
     </header>
 
     <main>
-    	<!-- Print user ID for debugging -->
-        <section class="debug">
-            <p>User ID: ${sessionScope.user.id}</p>
-        </section>
-        
+    	
         <section class="categories">
 		    <h2>Browse by Categories</h2>
 		    <div class="categories-list">
@@ -78,7 +81,7 @@
             <div class="items">
                 <c:forEach var="product" items="${products}">
                     <div class="item">
-                        <p><a href="#" class="product-link" data-id="${product.id}">${product.name}</a></p>
+                        <p><a href="#" class="product-link" data-id="${product.id}"><span style="font-weight:bold">${product.name}</span></a></p>
                         <p>$${product.price}</p>
                         <form action="${pageContext.request.contextPath}/cart/add" method="post">
                             <input type="hidden" name="user_id" value="${sessionScope.user.id}">
@@ -94,19 +97,20 @@
 
     <!-- Product Details Modal -->
     <div id="product-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="product-name"></h2>
-            <p id="product-description"></p>
-            <p>Price: $<span id="product-price"></span></p>
-            <form action="${pageContext.request.contextPath}/cart/add" method="post">
-                <input type="hidden" name="user_id" value="${sessionScope.user.id}">
-                <input type="hidden" id="modal-product-id" name="product_id">
-                <input type="hidden" name="count" value="1">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="product-name"></h2>
+        <p id="product-description"></p>
+        <p>Price: $<span id="product-price"></span></p>
+        <form action="${pageContext.request.contextPath}/cart/add" method="post">
+            <input type="hidden" name="user_id" value="${sessionScope.user.id}">
+            <input type="hidden" id="modal-product-id" name="product_id">
+            <input type="hidden" name="count" value="1">
+            <button type="submit" class="button">Add to Cart</button>
+        </form>
     </div>
+</div>
+
 
     <footer>
         <p>&copy; 2024 Secondhand Market. All rights reserved.</p>

@@ -6,10 +6,14 @@ import jhu.project.market.SecondhandMarket.Service.ProductService;
 import jhu.project.market.SecondhandMarket.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -24,6 +28,19 @@ public class SellerController {
         this.productService = productService;
         this.userService = userService;
     }
+    @GetMapping("/dashboard")
+    public String showSellerDashboard(HttpSession session, Model model) {
+        User seller = (User) session.getAttribute("user");
+
+        if (seller == null || !seller.isSeller()) {
+            return "redirect:/login"; // Redirect to login if the user is not logged in or not a seller
+        }
+
+        List<Product> products = productService.getAllProductsBySeller(seller);
+        model.addAttribute("products", products);
+
+        return "seller"; // Return the seller.jsp view
+    }
 
 
     @GetMapping("/list")
@@ -33,7 +50,8 @@ public class SellerController {
     }
 
     @PostMapping("/create")
-    public Product createProduct(
+    @ResponseBody
+    public String createProduct(
             @RequestParam int id,
             @RequestParam String name,
             @RequestParam String description,
@@ -46,7 +64,8 @@ public class SellerController {
         product.setPrice(price);
         product.setSeller(seller);
         product.setCategory(category);
-        return productService.saveProduct(product);
+        productService.saveProduct(product);
+        return "success"; 
     }
 
 }
