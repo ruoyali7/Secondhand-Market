@@ -23,35 +23,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-    
-//    @GetMapping("/browsing")
-//    public String showBrowsingPage(@RequestParam(required = false) String category,
-//                                   @RequestParam(required = false) String search,
-//                                   HttpSession session,
-//                                   Model model) {
-//        List<Product> products;
-//        
-//
-//        if (category != null && !category.isEmpty()) {
-//            products = productService.getAllProductsByCategory(category);
-//        } else if (search != null && !search.isEmpty()) {
-//            products = productService.getAllProducts().stream()
-//                    .filter(product -> product.getName().toLowerCase().contains(search.toLowerCase()))
-//                    .collect(Collectors.toList());
-//        } else {
-//            products = productService.getAllProducts();
-//        }
-//
-//        model.addAttribute("products", products);
-//     // Pass seller status to JSP
-//        User user = (User) session.getAttribute("user");
-//        if (user != null) {
-//            model.addAttribute("isSeller", user.isSeller());
-//        } else {
-//            model.addAttribute("isSeller", false);
-//        }
-//        return "browsing";  // This will return the browsing.jsp view
-//    }
+
     
     @GetMapping("/browsing")
     public String showBrowsingPage(@RequestParam(required = false) String category,

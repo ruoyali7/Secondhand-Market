@@ -56,7 +56,8 @@ public class SellerController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String category,
-            @RequestParam double price) {
+            @RequestParam double price,
+            @RequestParam int count) {
         User seller = userService.getUserById(id);
         Product product = new Product();
         product.setName(name);
@@ -64,6 +65,7 @@ public class SellerController {
         product.setPrice(price);
         product.setSeller(seller);
         product.setCategory(category);
+        product.setCount(count);
         productService.saveProduct(product);
         return "success"; 
     }

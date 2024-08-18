@@ -12,4 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> getProductsBySeller(User seller);
 
     List<Product> getProductsByCategory(String category);
+
+    List<Product> getProductsByCategoryAndCountIsGreaterThan(String category, int count);
+    List<Product> getAllByCountGreaterThan(int count);
 }

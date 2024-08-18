@@ -4,21 +4,26 @@ import jhu.project.market.SecondhandMarket.Entity.CartItem;
 import jhu.project.market.SecondhandMarket.Entity.Product;
 import jhu.project.market.SecondhandMarket.Entity.User;
 import jhu.project.market.SecondhandMarket.Repository.CartItemRepository;
-import jhu.project.market.SecondhandMarket.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
     private final CartItemRepository cartItemRepository;
     private final OrderService orderService;
+    private final ProductService productService;
 
     @Autowired
-    public CartService(CartItemRepository cartItemRepository, OrderService orderService) {
+    public CartService(
+            CartItemRepository cartItemRepository,
+            OrderService orderService,
+            ProductService productService) {
         this.cartItemRepository = cartItemRepository;
         this.orderService = orderService;
+        this.productService = productService;
     }
 
     public List<CartItem> listCartItemsForUser(User user) {
@@ -75,6 +80,13 @@ public class CartService {
     public boolean checkOutForUser(User user) {
         List<CartItem> cartItems = cartItemRepository.findCartItemsByUser(user);
         if (cartItems.isEmpty()) {
+            return false;
+        }
+        if (!productService.checkAvailabilityAndRemoveItems(
+                cartItems
+                        .stream()
+                        .map(CartItem::getProduct)
+                        .collect(Collectors.toList()))) {
             return false;
         }
         orderService.createOrder(user, cartItems);

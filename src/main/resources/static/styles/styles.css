@@ -198,6 +198,26 @@ main {
     box-sizing: border-box;
 }
 
+ .form-group select {
+     width: 100%;  /* Full width */
+     height: auto;  /* Adjust height automatically */
+     padding: 10px;  /* Padding inside the select */
+     margin-bottom: 20px;
+     font-family: monospace;  /* Monospace font like textarea */
+     border-radius: 4px;  /* Rounded corners */
+     border: 1px solid #ccc;  /* Border color */
+     background-color: #f9f9f9;  /* Background color */
+     color: #333;  /* Text color */
+     white-space: pre-wrap;  /* Wrap text inside */
+     appearance: none;  /* Remove default dropdown arrow */
+     -webkit-appearance: none;  /* Remove default dropdown arrow for Safari */
+     -moz-appearance: none;  /* Remove default dropdown arrow for Firefox */
+ }
+
+.form-group select:focus {
+    border-color: #007bff;  /* Change border color on focus */
+    outline: none;  /* Remove outline */
+}
 
 
 

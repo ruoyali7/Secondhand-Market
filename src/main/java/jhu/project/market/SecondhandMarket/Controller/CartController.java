@@ -137,13 +137,6 @@ public class CartController {
         return "redirect:/cart/list?user_id=" + user_id;
     }
 
-//    @PostMapping("/checkOut")
-//    public String checkOutForUser(@RequestParam int user_id, HttpSession session) {
-//        User user = userService.getUserById(user_id);
-//        boolean success = cartService.checkOutForUser(user);
-//        session.setAttribute("cartSize", 0); // Reset cart size after checkout
-//        return "redirect:/cart/list?user_id=" + user_id;
-//    }
     @PostMapping("/checkOut")
     public String showCheckoutPage(@RequestParam int user_id, Model model, HttpSession session) {
         User user = userService.getUserById(user_id);

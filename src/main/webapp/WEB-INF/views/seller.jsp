@@ -39,14 +39,25 @@
 		            <label for="description"><span style="font-weight:bold">Description:</span></label>
 		            <textarea name="description" id="description" required></textarea>
 		        </div>
-		        <div class="form-group">
-		            <label for="category"><span style="font-weight:bold">Category:</span></label>
-		            <input type="text" name="category" id="category" required>
-		        </div>
-		        <div class="form-group">
+                <div class="form-group">
+                    <label for="category"><span style="font-weight:bold">Category:</span></label>
+                    <select name="category" id="category" required>
+                        <option value="" disabled selected></option>
+                        <option value="electronics">Apparel</option>
+                        <option value="clothing">Electronics</option>
+                        <option value="books">Furniture</option>
+                        <option value="furniture">Books</option>
+                        <option value="furniture">Toys</option>
+                    </select>
+                </div>
+                <div class="form-group">
 		            <label for="price"><span style="font-weight:bold">Price:</span></label>
 		            <input type="number" step="0.01" name="price" id="price" required>
 		        </div>
+                <div class="form-group">
+                    <label for="count"><span style="font-weight:bold">Count:</span></label>
+                    <input type="number" step="1" name="count" id="count" required>
+                </div>
 		        <button type="submit" class="button">Add Item</button>
 		    </form>
 		</section>
@@ -59,6 +70,7 @@
                         <h3>${product.name}</h3>
                         <p class="price">$${product.price}</p>
                         <p class="description">${product.description}</p>
+                        <p class="count">Stock:${product.count}</p>
                     </div>
                 </c:forEach>
             </div>

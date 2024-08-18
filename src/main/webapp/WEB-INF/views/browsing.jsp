@@ -42,6 +42,12 @@
         <section class="categories">
 		    <h2>Browse by Categories</h2>
 		    <div class="categories-list">
+                <div class="category">
+                    <form action="${pageContext.request.contextPath}/product/browsing" method="get">
+                        <input type="hidden" name="category" value="">
+                        <button type="submit">All Items</button>
+                    </form>
+                </div>
 		        <div class="category">
 		            <form action="${pageContext.request.contextPath}/product/browsing" method="get">
 		                <input type="hidden" name="category" value="apparel">
@@ -86,7 +92,12 @@
                         <form action="${pageContext.request.contextPath}/cart/add" method="post">
                             <input type="hidden" name="user_id" value="${sessionScope.user.id}">
                             <input type="hidden" name="product_id" value="${product.id}">
-                            <input type="hidden" name="count" value="1">
+                            <label for="quantity-${product.id}">Quantity:</label>
+                            <select name="count" id="quantity-${product.id}" required>
+                                <c:forEach begin="1" end="${product.count}" var="i">
+                                    <option value="${i}">${i}</option>
+                                </c:forEach>
+                            </select>
                             <button type="submit">Add to Cart</button>
                         </form>
                     </div>
