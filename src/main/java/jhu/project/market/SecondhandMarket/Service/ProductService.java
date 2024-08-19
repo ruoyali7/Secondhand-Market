@@ -36,6 +36,10 @@ public class ProductService {
         return productRepository.getProductsBySeller(seller);
     }
 
+    public void deleteProduct(int id) {
+        productRepository.deleteById(id);
+    }
+
     public List<Product> getAllProductsByCategory(String category) {
         return productRepository.getProductsByCategoryAndCountIsGreaterThan(category, 0);
     }
