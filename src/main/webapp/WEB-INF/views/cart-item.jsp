@@ -34,7 +34,7 @@
                         <c:forEach var="cartItem" items="${cartItems}">
                             <div class="cart-item">
                                 <p>${cartItem.product.name}</p>
-                                <p>$${cartItem.totalPrice}</p>
+                                <p>$${cartItem.product.price}</p>
                                 <p>Quantity: ${cartItem.count}</p>
                                 <form action="${pageContext.request.contextPath}/cart/delete" method="post">
                                     <input type="hidden" name="user_id" value="${sessionScope.user.id}">

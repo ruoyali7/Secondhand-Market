@@ -72,16 +72,16 @@ public class SellerController {
 
 
     @PostMapping("/update")
+    @ResponseBody
     public String updateProduct(
             @RequestParam int productId,
-            @RequestParam int count,
-            HttpSession session) {
+            @RequestParam int count) {
 
         Product product = productService.getProductById(productId);
         product.setCount(count);
         productService.saveProduct(product);
 
-        return "redirect:/seller/dashboard";
+        return "success";
     }
 
 
