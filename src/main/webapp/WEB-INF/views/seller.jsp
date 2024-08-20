@@ -43,11 +43,11 @@
                     <label for="category"><span style="font-weight:bold">Category:</span></label>
                     <select name="category" id="category" required>
                         <option value="" disabled selected></option>
-                        <option value="electronics">Apparel</option>
-                        <option value="clothing">Electronics</option>
-                        <option value="books">Furniture</option>
-                        <option value="furniture">Books</option>
-                        <option value="furniture">Toys</option>
+                        <option value="apparel">Apparel</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="books">Books</option>
+                        <option value="toys">Toys</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -71,6 +71,13 @@
                         <p class="price">$${product.price}</p>
                         <p class="description">${product.description}</p>
                         <p class="count">Stock:${product.count}</p>
+
+                        <form action="${pageContext.request.contextPath}/seller/update" method="post">
+                            <label for="countInput-${product.id}"><span style="font-weight:bold">Modify Stock:</span></label>
+                            <input type="number" step="1" name="count" id="countInput-${product.id}" value="${product.count}" required>
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <button type="submit">Update</button>
+                        </form>
                     </div>
                 </c:forEach>
             </div>

@@ -34,7 +34,8 @@ public class ProductController {
         if (user == null) {
             return "redirect:/login"; // Redirect to login page if user is not logged in
         }
-
+        // Log the category to check if it's being passed correctly
+        System.out.println("Selected category: " + category);
         List<Product> products;
         if (category != null && !category.isEmpty()) {
             products = productService.getAllProductsByCategory(category);

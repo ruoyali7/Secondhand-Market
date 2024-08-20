@@ -70,35 +70,19 @@ public class SellerController {
         return "success"; 
     }
 
+
     @PostMapping("/update")
-    @ResponseBody
     public String updateProduct(
             @RequestParam int productId,
             @RequestParam int count,
-            Model model) {
+            HttpSession session) {
+
         Product product = productService.getProductById(productId);
-        if (product == null) {
-            model.addAttribute("error", "Product not found.");
-            return "seller";
-        }
         product.setCount(count);
         productService.saveProduct(product);
-        return "success";
+
+        return "redirect:/seller/dashboard";
     }
 
-    @PostMapping("/delete")
-    @ResponseBody
-    public String deleterPoduct(
-            @RequestParam int productId,
-            @RequestParam int count,
-            Model model) {
-        Product product = productService.getProductById(productId);
-        if (product == null) {
-            model.addAttribute("error", "Product not found.");
-            return "seller";
-        }
-        productService.deleteProduct(productId);
-        return "success";
-    }
 
 }
