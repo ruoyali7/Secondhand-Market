@@ -20,7 +20,7 @@
             <nav>
                 <ul>
                     <li><a href="javascript:void(0)" onclick="redirectToLogin()">Browse Products</a></li>
-                    <li><a href="javascript:void(0)" onclick="redirectToLogin()">Admin Panel</a></li>
+<%--                    <li><a href="javascript:void(0)" onclick="redirectToLogin()">Admin Panel</a></li>--%>
                     <li><a href="javascript:void(0)" onclick="redirectToLogin()">User Profile</a></li>
                 </ul>
             </nav>

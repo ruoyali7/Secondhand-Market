@@ -72,7 +72,6 @@ public class SellerController {
 
 
     @PostMapping("/update")
-    @ResponseBody
     public String updateProduct(
             @RequestParam int productId,
             @RequestParam int count) {
@@ -81,7 +80,7 @@ public class SellerController {
         product.setCount(count);
         productService.saveProduct(product);
 
-        return "success";
+        return "redirect:/seller/dashboard";
     }
 
 

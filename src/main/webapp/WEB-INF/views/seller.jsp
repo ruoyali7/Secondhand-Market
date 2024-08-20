@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Dashboard - Secondhand Market</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css?v=${now.time}">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -70,77 +70,44 @@
                     <h3>${product.name}</h3>
                     <p class="price">$${product.price}</p>
                     <p class="description">${product.description}</p>
-                    <p class="count">Stock: ${product.count}</p>
-                    <button class="button update-stock" data-id="${product.id}" data-count="${product.count}">Update Stock</button>
-<%--                    <button class="button delete-stock" data-id="${product.id}">Delete Stock</button>--%>
+                    <p class="count">Stock:${product.count}</p>
 
-<%--                    <form action="${pageContext.request.contextPath}/seller/update" method="post">--%>
-<%--                        <label for="countInput-${product.id}"><span style="font-weight:bold">Modify Stock:</span></label>--%>
-<%--                        <input type="number" step="1" name="count" id="countInput-${product.id}" value="${product.count}" required>--%>
-<%--                        <input type="hidden" name="productId" value="${product.id}">--%>
-<%--                        <button type="submit">Update</button>--%>
-<%--                    </form>--%>
+                    <form action="${pageContext.request.contextPath}/seller/update" method="post">
+                        <label for="countInput-${product.id}"><span style="font-weight:bold">Modify Stock:</span></label>
+                        <input type="number" step="1" name="count" id="countInput-${product.id}" value="${product.count}" required>
+                        <input type="hidden" name="productId" value="${product.id}">
+                        <button type="submit">Update</button>
+                    </form>
                 </div>
             </c:forEach>
         </div>
     </section>
 
-    <!-- Update Stock Modal -->
-    <div id="update-stock-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Update Stock</h2>
-            <form id="updateStockForm">
-                <input type="hidden" name="productId" id="update-product-id">
-                <div class="form-group">
-                    <label for="new-count">New Stock Count:</label>
-                    <input type="number" name="count" id="new-count" min="0" required>
-                </div>
-                <button type="submit" class="button">Update</button>
-            </form>
-        </div>
-    </div>
-
     <script>
         $(document).ready(function () {
-
-            // Open modal for updating stock
-            $(".update-stock").click(function () {
-                const productId = $(this).data("id");
-                const currentCount = $(this).data("count");
-                $("#update-product-id").val(productId);
-                $("#new-count").val(currentCount);
-                $("#update-stock-modal").show();
-            });
-
-            // Handle stock update form submission
-            $("#updateStockForm").on('submit', function (e) {
+            $('#addItemForm').on('submit', function (e) {
                 e.preventDefault();
 
                 $.ajax({
-                    url: '${pageContext.request.contextPath}/seller/update',
+                    url: '${pageContext.request.contextPath}/seller/create',
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function (response) {
                         if (response === 'success') {
+                            // Reload the items list
                             loadSellerItems();
-                            $("#update-stock-modal").hide();
+                            // Clear the form fields
+                            $('#addItemForm')[0].reset();
                         } else {
-                            alert('Failed to update stock');
+                            alert('Failed to add item');
                         }
                     },
                     error: function () {
-                        alert('Error updating stock');
+                        alert('Error adding item');
                     }
                 });
             });
 
-            // Close the modal
-            $(".close").click(function () {
-                $("#update-stock-modal").hide();
-            });
-
-            // Function to reload seller items
             function loadSellerItems() {
                 $.get('${pageContext.request.contextPath}/seller/dashboard', function (data) {
                     var items = $(data).find('#sellerItems').html();
@@ -156,3 +123,4 @@
 </footer>
 </body>
 </html>
+
